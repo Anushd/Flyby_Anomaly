@@ -1,4 +1,4 @@
-data = csvread('/Users/anush/desktop/NASA_data.csv');
+data = csvread('data.csv');
 
 %observed anomalous velocity change
 y = data(:, 7);
