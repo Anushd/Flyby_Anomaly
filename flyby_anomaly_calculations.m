@@ -1,4 +1,4 @@
-data = csvread('data.csv');
+data = csvread('/Users/anush/desktop/NASA_data.csv');
 
 %observed anomalous velocity change
 y = data(:, 7);
@@ -58,9 +58,11 @@ disp('equation 7 MSE')
 disp(immse(x_2*coefs5,y))
 
 %equation 10) | fluid density as a function of inclination angle 
-p2 = (cos(data(:,1)).^-1);
+alt = data(:, 1);
+alt(data(:,1)>90) = alt(data(:,1)>90)-90;
+p2 = (cosd(alt+mean(10,23)).^-1);
 vp2 = x2_ngtve(:,5).*p2;
-x_3 = [vp2, f];
+x_3 = [vp2, f, x3_ngtve(:,5).*(1./(1-exp(-data(:,3)))).^-1];
 coefs6 = regress(y, x_3);
 disp('equation 10 coefficients')
 disp(coefs6)
